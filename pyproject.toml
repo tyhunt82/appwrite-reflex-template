@@ -1,7 +1,14 @@
 [project]
 name = "appwrite-reflex-template"
 version = "0.1.0"
-description = "Add your description here"
+description = "Full Appwrite & Reflex App Template"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "make>=0.1.6.post2",
+    "pandas>=2.3.3",
+    "plotly>=6.5.1",
+    "plotly-express>=0.4.1",
+    "python-dotenv>=1.2.1",
+    "reflex>=0.8.24.post1",
+]
