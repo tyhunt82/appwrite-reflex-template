@@ -6,7 +6,7 @@ from app.components.shared import status_badge, category_icon
 
 def summary_card(
     title: str, value: str, trend: str, icon: str, color_scheme: str
-) -> rx.Component:
+ )  -> rx.Component:
     """A statistical summary card."""
     colors = {
         "teal": "from-teal-500 to-emerald-500",

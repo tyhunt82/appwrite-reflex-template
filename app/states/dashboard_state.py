@@ -46,7 +46,7 @@ class ChartData(TypedDict):
 
 class DashboardState(rx.State):
     """State for the dashboard and expense management."""
-
+    
     current_page: str = "Dashboard"
     nav_items: list[str] = ["Dashboard", "Expenses", "Categories", "Reports"]
     expenses: list[Expense] = []
@@ -130,6 +130,30 @@ class DashboardState(rx.State):
     @rx.event
     def set_is_clear_data_open(self, value: bool):
         self.is_clear_data_open = value
+
+    @rx.event
+    def set_is_add_open(self, value: bool):
+        self.is_add_open = value
+
+    @rx.event
+    def set_is_edit_open(self, value: bool):
+        self.is_edit_open = value
+
+    @rx.event
+    def set_is_delete_open(self, value: bool):
+        self.is_delete_open = value
+
+    @rx.event
+    def set_is_cat_add_open(self, value: bool):
+        self.is_cat_add_open = value
+
+    @rx.event
+    def set_is_cat_edit_open(self, value: bool):
+        self.is_cat_edit_open = value
+
+    @rx.event
+    def set_is_cat_delete_open(self, value: bool):
+        self.is_cat_delete_open = value
 
     @rx.event
     def clear_all_data(self):

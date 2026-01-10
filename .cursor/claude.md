@@ -12,7 +12,7 @@ This is a multi-tenant SaaS template using Reflex (Python frontend + built-in Fa
 - **Backend**: Reflex State classes (event handlers = backend logic) + built-in FastAPI
 - **Services**: Appwrite Cloud (Database, Auth, Storage, Functions)
 - **Deployment**: 
-  - Frontend → Appwrite Sites (static hosting)
+  - Frontend → Appwrite Sites (static hosting) derrived from reflex build --frontend
   - Backend → Appwrite Functions (Python runtime with Reflex)
 
 ### Data Flow

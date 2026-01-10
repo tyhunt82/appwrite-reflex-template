@@ -6,7 +6,7 @@ from app.components.categories_view import categories_view
 from app.components.reports_view import reports_view
 from app.components.settings_view import settings_view
 from app.states.dashboard_state import DashboardState
-
+from app.components.theme_toggle import theme_toggle
 
 def dashboard_header() -> rx.Component:
     return rx.el.div(
@@ -18,6 +18,7 @@ def dashboard_header() -> rx.Component:
             ),
         ),
         rx.el.div(
+            theme_toggle(),
             rx.el.button(
                 rx.icon("bell", size=20),
                 rx.el.span(
@@ -67,7 +68,7 @@ def index() -> rx.Component:
 
 
 app = rx.App(
-    theme=rx.theme(appearance="light"),
+    theme=rx.theme(appearance="inherit"),
     stylesheets=[
         "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
     ],
