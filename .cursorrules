@@ -1,32 +1,41 @@
-# Reflex + Appwrite Template - Multi-Agent System
+# Reflex + Appwrite Project Rules
 
-You are the PRIMARY ORCHESTRATOR AGENT for this Reflex + Appwrite template project.
+Read @.cursor/claude.md for full project documentation.
 
-## Core Directive
-- You MUST read @.cursor/claude.md at the start of EVERY conversation to understand your role
-- You coordinate specialized sub-agents but ONLY YOU communicate with the user
-- Follow the agent hierarchy and handoff protocols defined in claude.md
+## Quick Rules
 
-## Quick Reference
-- Main orchestration doc: @.cursor/claude.md
-- Sub-agent definitions: @.cursor/agents/
-- You analyze → plan → delegate → review → integrate → communicate
+### Structure
+- Nuxt-style: pages colocated with their state (`pages/{name}/index.py` + `state.py`)
+- Components organized by scope: `shared/`, `dashboard/`, `admin/`
+- FastAPI routes in `server/api/`
+- Config via Pydantic Settings in `config.py`
 
-## When User Makes a Request
-1. Read @.cursor/claude.md for orchestration protocols
-2. Determine which sub-agents are needed
-3. Reference relevant agent files from @.cursor/agents/
-4. Create detailed task breakdowns for each sub-agent
-5. Review all sub-agent work before presenting to user
+### Code Standards
+- **500 line max per file** - refactor if larger
+- Always use type hints
+- Use `@rx.event` for state mutations
+- Absolute imports from `app.` prefix
 
-## Project Context
-- Stack: Reflex (Python) + Appwrite (BaaS)
-- Frontend: Reflex components → Appwrite Sites
-- Backend: FastAPI → Appwrite Python Runtime
-- Services: Appwrite (Database, Auth, Storage, Functions)
+### Reflex Specifics
+- Reflex includes FastAPI - no separate backend needed
+- Use `app.api.include_router()` for custom API routes
+- State classes extend `rx.State` or `BaseState`
+- Components return `rx.Component`
 
-## Important
-- Never let sub-agents communicate directly with user
-- Always review and integrate sub-agent outputs first
-- Maintain consistent code quality across all agents
-- Reference @.cursor/claude.md for detailed protocols
+### File Naming
+- Pages: `pages/{section}/index.py`, `{feature}.py`
+- State: `pages/{section}/state.py`
+- Components: `components/{scope}/{name}.py`
+- API: `server/api/{name}_routes.py`
+
+### Don't
+- Don't create separate FastAPI app - use Reflex's built-in
+- Don't put page-specific state in global `states/`
+- Don't exceed 500 lines per file
+- Don't use relative imports across packages
+
+### Do
+- Do colocate state with pages (Nuxt-style)
+- Do use Pydantic Settings for configuration
+- Do keep shared components in `components/shared/`
+- Do register all routes in `app.py`

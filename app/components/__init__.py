@@ -1,1 +1,1 @@
-# Components package
+"""Components package."""
