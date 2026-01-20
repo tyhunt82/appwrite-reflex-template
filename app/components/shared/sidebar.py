@@ -128,7 +128,7 @@ def sidebar(current_page: str = "dashboard") -> rx.Component:
             sidebar_section(
                 "Main",
                 [
-                    nav_item("Dashboard", "layout-dashboard", "/", current_page == "dashboard"),
+                    nav_item("Dashboard", "layout-dashboard", "/dashboard", current_page == "dashboard"),
                     nav_item("Admin", "shield", "/admin", current_page == "admin"),
                 ],
             ),

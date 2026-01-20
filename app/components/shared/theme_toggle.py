@@ -16,5 +16,5 @@ def theme_toggle() -> rx.Component:
         ),
         on_click=rx.toggle_color_mode,
         variant="ghost",
-        class_name="text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg",
+        class_name="rounded-md",
     )

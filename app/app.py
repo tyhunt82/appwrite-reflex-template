@@ -1,35 +1,42 @@
 """Main Reflex application entry point."""
 
 import reflex as rx
-from fastapi import FastAPI
 
+# Pages
+from app.pages.landing import landing_page
 from app.pages.dashboard import dashboard_page
 from app.pages.admin import admin_page
 from app.pages.settings import settings_page
-from app.server.api import health_router
 
-# Create FastAPI instance for custom routes
-api = FastAPI()
-api.include_router(health_router)
+# Routers
+from app.server.api import register_health_routes
 
-# Create Reflex app with custom API
-app = rx.App(
-    theme=rx.theme(
-        accent_color="indigo",
-        gray_color="slate",
-        # Use a static default; Reflex's color mode provider handles toggling.
-        appearance="dark",
-        radius="small",
-        scaling="90%",
-        panel_background="translucent",
-    ),
-    stylesheets=[
-        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-    ],
-    api_transformer=api,
-)
+# Config
+from app.config import settings
 
-# Register pages
-app.add_page(dashboard_page, route="/", title="Dashboard")
-app.add_page(admin_page, route="/admin", title="Admin")
-app.add_page(settings_page, route="/settings", title="Settings")
+
+def create_app(): 
+    app = rx.App(
+        theme = settings.theme,
+        stylesheets=[
+            "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        ],
+    )
+
+    # Attach custom API routes to Reflex's internal Starlette app.
+    register_health_routes(app._api)
+
+
+    # Register pages
+    app.add_page(landing_page, route="/", title="Landing")
+    app.add_page(dashboard_page, route="/dashboard", title="Dashboard")
+    app.add_page(admin_page, route="/admin", title="Admin")
+    app.add_page(settings_page, route="/settings", title="Settings")
+
+    return app  
+
+# Main entry point
+app = create_app()
+
+if __name__ == "__main__":
+    app.compile()

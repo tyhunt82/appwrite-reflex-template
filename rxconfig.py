@@ -1,17 +1,10 @@
 import reflex as rx
 from reflex.plugins import sitemap
+from app.config import settings
 
 config = rx.Config(
     app_name="app",
-    theme=rx.theme(
-        accent_color="indigo",
-        gray_color="slate",
-        appearance="dark",
-        radius="small",
-        scaling="90%",
-        panel_background="translucent",
-        has_background=True,
-    ),
+    theme= settings.theme,
     frontend_packages=["react-icons"],
     frontend_port=3000,
     backend_port=8000,

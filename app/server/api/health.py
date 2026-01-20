@@ -1,17 +1,23 @@
 """Health check API routes."""
 
-from fastapi import APIRouter
+from __future__ import annotations
 
-router = APIRouter(prefix="/api", tags=["health"])
+from starlette.applications import Starlette
+from starlette.requests import Request
+from starlette.responses import JSONResponse
 
 
-@router.get("/health")
-async def health_check():
+async def health_check(_: Request) -> JSONResponse:
     """Basic health check endpoint."""
-    return {"status": "ok", "message": "API is running"}
+    return JSONResponse({"status": "ok", "message": "API is running"})
 
 
-@router.get("/health/ready")
-async def readiness_check():
+async def readiness_check(_: Request) -> JSONResponse:
     """Readiness check - can add DB/service checks here."""
-    return {"status": "ready"}
+    return JSONResponse({"status": "ready"})
+
+
+def register_health_routes(app: Starlette) -> None:
+    """Register health endpoints on the given Starlette app."""
+    app.add_route("/api/health", health_check, methods=["GET"])
+    app.add_route("/api/health/ready", readiness_check, methods=["GET"])

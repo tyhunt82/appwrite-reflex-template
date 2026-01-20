@@ -1,7 +1,13 @@
 """Application configuration using Pydantic Settings."""
 
+from __future__ import annotations
+
+from typing import Any, ClassVar
+
+import reflex as rx
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
-import os
+
 
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
@@ -17,21 +23,26 @@ class Settings(BaseSettings):
     debug: bool = True
 
     # Appwrite
-    appwrite_endpoint: str = os.getenv("APPWRITE_ENDPOINT")
-    appwrite_project_id: str = os.getenv("APPWRITE_PROJECT_ID")
+    appwrite_endpoint: str | None = Field(default=None, validation_alias="APPWRITE_ENDPOINT")
+    appwrite_project_id: str | None = Field(default=None, validation_alias="APPWRITE_PROJECT_ID")
 
-    appwrite_api_key: str = os.getenv("APPWRITE_API_KEY")
-    appwrite_dev_api_key: str = os.getenv("APPWRITE_DEV_API_KEY")
+    appwrite_api_key: str | None = Field(default=None, validation_alias="APPWRITE_API_KEY")
+    appwrite_dev_api_key: str | None = Field(default=None, validation_alias="APPWRITE_DEV_API_KEY")
 
-    appwrite_database_id: str = os.getenv("APPWRITE_DATABASE_ID")
-    appwrite_storage_id: str = os.getenv("APPWRITE_STORAGE_ID")
+    appwrite_database_id: str | None = Field(default=None, validation_alias="APPWRITE_DATABASE_ID")
+    appwrite_storage_id: str | None = Field(default=None, validation_alias="APPWRITE_STORAGE_ID")
 
 
     # UI Defaults
-    default_theme: str = "system"  # "light", "dark", "system"
     sidebar_default_collapsed: bool = False
-
-
+    theme: ClassVar[Any] = rx.theme(
+        accent_color="blue",
+        gray_color="slate",
+        appearance="dark",
+        radius="small",
+        scaling="90%",
+        panel_background="translucent",
+    )
 
 
 

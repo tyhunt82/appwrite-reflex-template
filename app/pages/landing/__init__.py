@@ -1,6 +1,6 @@
-"""Dashboard page exports."""
+"""Landing page exports."""
 
-from app.pages.dashboard.index import dashboard_page
-from app.pages.dashboard.state import DashboardState
+from app.pages.landing.index import landing_page
+from app.pages.landing.state import LandingState
 
-__all__ = ["dashboard_page", "DashboardState"]
+__all__ = ["landing_page", "LandingState"]
